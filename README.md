@@ -4,10 +4,10 @@ Bem-vindo ao repositório de projetos back-end! Aqui você encontrará uma cole�
 <h2>🚀 Visão Geral</h2>
 Este repositório contém vários projetos que exploram aspectos técnicos avançados do back-end, incluindo:<br><br>
 
-Desenvolvimento de APIs: Implementação de APIs RESTful e GraphQL utilizando práticas de design robustas, como versionamento de APIs, documentação automática com OpenAPI/Swagger e controle de versão de contratos de APIs.<br>
-Gerenciamento de Dados: Modelagem e manipulação de dados com bancos de dados relacionais (SQL) e não relacionais (NoSQL), incluindo estratégias de normalização, indexação e consultas otimizadas para garantir integridade e performance dos dados.<br>
-Autenticação e Autorização: Implementação de sistemas de autenticação e autorização seguros utilizando OAuth2, JWT e controle de acesso baseado em funções (RBAC), com foco em práticas de segurança, como hashing de senhas e criptografia de dados sensíveis.<br>
-Otimização e Escalabilidade: Aplicação de técnicas para otimizar o desempenho do servidor, incluindo caching com Redis, balanceamento de carga e arquiteturas de microservices para garantir escalabilidade horizontal e resiliência.<br>
+<b>Desenvolvimento de APIs</b>: Implementação de APIs RESTful e GraphQL utilizando práticas de design robustas, como versionamento de APIs, documentação automática com OpenAPI/Swagger e controle de versão de contratos de APIs.<br><br>
+<b>Gerenciamento de Dados</b>: Modelagem e manipulação de dados com bancos de dados relacionais (SQL) e não relacionais (NoSQL), incluindo estratégias de normalização, indexação e consultas otimizadas para garantir integridade e performance dos dados.<br><br>
+<b>Autenticação e Autorização</b>: Implementação de sistemas de autenticação e autorização seguros utilizando OAuth2, JWT e controle de acesso baseado em funções (RBAC), com foco em práticas de segurança, como hashing de senhas e criptografia de dados sensíveis.<br><br>
+<b>Otimização e Escalabilidade</b>: Aplicação de técnicas para otimizar o desempenho do servidor, incluindo caching com Redis, balanceamento de carga e arquiteturas de microservices para garantir escalabilidade horizontal e resiliência.
 
 <h2>🛠️ Tecnologias Utilizadas</h2>
 Linguagens de Programação: Node.js, Python, Java.<br>
