@@ -24,4 +24,7 @@ def main():
 
     connection = "mysql+pymysql://u721539099_sigeps:/XVQ+y6T[y4@193.203.175.84:3306/u721539099_SIGEPS"
     tables = get_table(connection)
+    create_siquelize(tables, './models')
+
+
 
