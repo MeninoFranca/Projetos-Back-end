@@ -9,6 +9,9 @@ const {{ model_name }} = sequelize.define('{{ model_name }}', {
         {% if column.primary_key %}primaryKey: true,{% endif %} //Adiciona pk se a coluna tiver chave primaria
     },
     {% endfor %}
+},{
+    tableName: '{{ table_name }}', 
+    timestamps: false
 });
 
-
+module.exports = {{ model_name }};
