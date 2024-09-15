@@ -16,3 +16,6 @@ def create_siquelize(tables, path):
                 'primary_key': column.primary_key
             })
         model_code = template.render(table_name=table_name, model_name=table_name.capitalize(), columns=columns)
+        save = os.path.join(path, f'{table_name}.js')
+        with open(save, 'w') as model_file:
+            model_file.write(model_code)
