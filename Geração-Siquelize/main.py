@@ -15,3 +15,4 @@ def create_siquelize(tables, path):
                 'nullable': column.nullable,
                 'primary_key': column.primary_key
             })
+        model_code = template.render(table_name=table_name, model_name=table_name.capitalize(), columns=columns)
