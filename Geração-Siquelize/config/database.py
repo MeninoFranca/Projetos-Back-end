@@ -1,9 +1,7 @@
-import pymysql
+from sqlalchemy import create_engine, MetaData
 
-def get_db_connection():
-    return pymysql.connect(
-        host = "193.203.175.84",
-        user = "u721539099_sigeps",
-        password = "/XVQ+y6T[y4",
-        database = "u721539099_SIGEPS"
-    )
+def get_table(connection_url):
+    engine = create_engine(connection_url)
+    metadata = MetaData()
+    metadata.reflect(bind=engine)
+    return metadata.tables
