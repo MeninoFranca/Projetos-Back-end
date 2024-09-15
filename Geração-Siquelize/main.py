@@ -26,5 +26,6 @@ def main():
     tables = get_table(connection)
     create_siquelize(tables, './models')
 
-
+if __name__ == '__main__':
+    main()
 
