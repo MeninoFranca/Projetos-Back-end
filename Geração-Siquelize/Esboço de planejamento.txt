@@ -1,0 +1,172 @@
+Oque eu quero? Programa que ler a tabela do banco e gera arquivo sequilize
+
+oque eu posso fazer?
+
+(V1)
+conexao no banco, ler as colunas de cada tabela e armazena e funcao para gerar arquivo js
+
+(V2)
+conexao no banco, ler as colunas de cada tabela e armazena, arquivo pre definido do sequelize e funcao para gerar arquivo js
+
+(V3)
+conexao no banco, ler as colunas de cada tabela e armazena, arquivo pre definido do sequelize, funcao para gerar arquivo js, pasta para guardar arquivos gerados
+
+(V4)
+conexao no banco, ler as colunas de cada tabela e armazena, arquivo pre definido do sequelize, manipular arquivo pré definido do sequilize, funcao para gerar arquivo js, pasta para guardar arquivos gerados
+
+
+Estrutura atualizada:
+
+Gerador_sequilize/
+ 	/models                     Diretório onde os modelos sequilize gerados serão armazenados
+ 	/templates                  Diretório onde se encontra o template Jinja2 para os arquivos .js
+		model_template.js   Template para geração de código dos modelos
+ 	main.py                     Script principal que executa a geração dos modelos
+ 	/config                     Configurações relacionadas ao banco de dados
+  		database.py         Script que contém a lógica de introspecção do banco de dados
+
+
+
+
+Detalhamento de como eu posso fazer conexao e leitura das tabelas e armazenalas:
+
+	(V1)
+	usando a biblioteca pymysql 
+
+		conexao:
+		connection():
+			connection = pymysql.conect(
+			host=''
+			user=''
+			password=''
+			database=''
+			)
+
+	já conectei. como posso fazer a leitura?
+
+		criando um cursor,variavel e querys para pegar as tabelas
+
+    		query = select * from 'nome_da_tabela'
+    		cursor.execute(query)
+    		results = cursor.fetchal(); 
+    		for row in results:
+        	    data = row	
+
+	(V2)
+	usando orm sqlalchemy que se conecta ao bd usando a url fornecida, reflete todas as tabelas presentes no bd e retorna um dicionário com a estrutura das tabelas.
+
+		def get_table(url):
+    		engine = create_engine(url)
+    		metadata = MetaData()
+    		metadata.reflect(bind=engine)
+    		return metadata.tables
+
+
+Detalhamento de como eu posso criar um arquivo pre definido do sequelize:
+	
+	(V1)
+	Criando um arquivo js puro so com o codigo sequilize virgem manipula-lo um pouco para recebe nome da tabela e outras coisa, posso com o python ler o arquivo e gera-lo, entao com essa conclusao eu posso criar um js normal com 	codigo do padrao do sequilize, após isso eu começo a manipulação.
+
+	esboço de sequelize manipulado:
+
+	const { Sequelize, DataTypes } = require('sequelize');
+	const connection = require('./database/db'); 
+
+	const table_nome.capitalize() = connection.define('table_nome', {
+  	for column in columns
+	  column.name : { 
+        	type: DataTypes.column.data_type,
+        	allowNull: column.nullable,
+          if column.primary_key
+		primaryKey: true,
+    	  },
+     	endfor
+ 	 {
+  		tableName: 'table_name',
+  		timestamps: false,
+	 });
+
+
+	module.exports = model_name
+
+Com arquivo pré definido modelado, falta agora a funcao que vai ta com os dados do banco e vai manipular o arquivo sequelize. Como eu posso fazer isso?
+
+	(V1)
+	Usando sequelize cli, deu muito erro eu desistir
+	
+	(V2)
+	Escrever JSON para armazenar os esquemas de tabelas
+	
+		def json(tables, path):
+    			for table_name, table in tables.items():
+        			esq_table= {
+            				'table_name': table_name,
+            				columns: [
+                				{
+                    					name: column.name,
+                    					data_type: column.type,
+                    					nullable: column.nullable,
+                    					primary_key: column.primary_key
+                				}
+                				for column in table.columns
+            				]
+        			}
+        			save = (path,'table_name'.json)
+        			with open(save, 'w') as json_file:
+            				json.dump(esq_table, json_file)
+
+		Logo depois preciso criar uma funcao para ler e gerar os modelos js
+
+		-Ler o conteúdo do arquivo de template e armazenar em uma variável 'template'
+    
+    		-Criar o diretório de saída (output_path) se ele não existir
+    
+		-Se o nome do arquivo terminar com '.json':
+            	
+		-Obter a lista de colunas da variável 'table'
+            
+   		-Gerar a string de parâmetros para o construtor JavaScript
+               
+         	-Gerar a string de inicialização para o construtor JavaScript
+                
+     		-Substituir os placeholders no template JavaScript
+                
+            	-Criar o caminho completo para o arquivo de saída
+           	
+		-Salvar o código JavaScript gerado no arquivo de saída
+            
+   		-Fechar todos os arquivos abertos
+	
+	(V3)
+		Funçao que lembra um pouco a V2 so que mais robusta, nessa versão, ja irá ser manipulada e gerada
+
+		def create_siquelize(tables, path):
+    			env = Environment('templates')
+    			template = env.get_template('model_template.js')
+
+    			for table_name, table in tables.items():
+        			columns = []
+        			for column in table.columns:
+            				columns.append({
+                				name: column.name,
+                				data_type: column.type,
+                				nullable: column.nullable,
+                				primary_key: column.primary_key
+            				})
+
+        		model_code = template.render(table_name=table_name, model_name=table_name)
+        		save = (path, 'table_name.js')
+        		with open(save, 'w') as model_file:
+            		    	model_file.write(model_code)
+
+	
+
+			
+
+
+
+
+
+
+
+
