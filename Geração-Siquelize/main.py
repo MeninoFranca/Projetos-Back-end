@@ -19,3 +19,8 @@ def create_siquelize(tables, path):
         save = os.path.join(path, f'{table_name}.js')
         with open(save, 'w') as model_file:
             model_file.write(model_code)
+        
+def main():
+
+    connection = "mysql+pymysql://u721539099_sigeps:/XVQ+y6T[y4@193.203.175.84:3306/u721539099_SIGEPS"
+    
